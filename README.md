@@ -2,6 +2,8 @@
 
 Keeps the publication lists in my CV up to date from NASA ADS, with my name in bold.
 
+See a compiled example at [cv/publication_list.pdf](cv/publication_list.pdf).
+
 New: now configurable for any user! See the greatly expanded `config.toml`.
 
 ## Usage

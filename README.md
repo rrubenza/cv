@@ -17,7 +17,8 @@ uv run scripts/pub_stats.py              # summary stats from the last update
 uv run scripts/prepare_cv.py             # just refresh pubs/for_cv/ from the lists
 ```
 
-This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `pubs/`, newest first:
+This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `pubs/`, sorted in reverse chronological order. Note `prepare_cv.py`, which merges lists into the CV section files in `pubs/for_cv/` set by `[cv_sections]` (keeping each file's hand-written header), runs automatically at the end of `update_pubs.py`, but you can also run it itself to just update that step.
+
 
 | File | Contents |
 | --- | --- |
@@ -37,8 +38,6 @@ This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `
 | `other/abstracts.tex` | meeting abstracts |
 | `papers.json` | per-paper metadata (author position, citations, ...) |
 | `missing_orcid.md` | papers where ADS doesn't link your ORCID to your name |
-
-`prepare_cv.py` (runs automatically at the end of `update_pubs.py`) then merges lists into the CV section files in `pubs/for_cv/` set by `[cv_sections]`, keeping each file's hand-written header.
 
 ## Setting it up for your own publications
 

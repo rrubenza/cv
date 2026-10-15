@@ -22,7 +22,7 @@ chronological order:
     cv_entries.json            entries for the CV sections, for prepare_cv.py
     missing_orcid.md           papers where ADS doesn't link your ORCID (if orcid is set)
 
-then runs prepare_cv.py to refresh the CV section files in pubs/for_cv/.
+then runs prepare_cv.py to refresh the CV section files in cv/publists/.
 
 Finds and bolds your name wherever it appears; if the author list is truncated
 before your name, a bold "(incl. XYZ)" with your initials is inserted instead.
@@ -603,7 +603,7 @@ def max_authors_per_list(names, override=None):
 
 
 def max_authors_per_section(list_limits, override=None):
-    """{(CV section, list name): authors to show} for the pubs/for_cv/ sections.
+    """{(CV section, list name): authors to show} for the cv/publists/ sections.
 
     Uses [cv_max_authors] in config.toml, falling back to each list's own limit.
     """
@@ -623,6 +623,7 @@ def main():
         type=int,
         help="authors listed before 'et al.' in every list, overriding config.toml",
     )
+    parser.add_argument("--pdf", action="store_true", help="also compile cv/publication_list.pdf")
     args = parser.parse_args()
 
     session = requests.Session()
@@ -673,7 +674,7 @@ def main():
     report_missing_orcid(docs)
 
     print("\nCV sections:")
-    prepare_cv.main()
+    prepare_cv.main(pdf=args.pdf)
 
     if groups[NON_REFEREED]:
         stars = "*" * 80

@@ -42,8 +42,8 @@ library = "Publications (TKS)"
 refereed_bibstems = ["RNAAS"]
 
 [cv_sections]
-# CV section files in pubs/for_cv/, defined by the lists they contain.
-# Missing files in pubs/for_cv/ are created with a minimal header for you to edit.
+# CV section files in cv/publists/, defined by the lists they contain.
+# Missing files in cv/publists/ are created with a minimal header for you to edit.
 "selectedpubs.tex" = ["1_first_author", "2_second_third_author"]
 "ascollaborator.tex" = ["3.1_as_collaborator"]
 "asobserver.tex" = ["3.2_as_observer"]
@@ -55,6 +55,15 @@ refereed_bibstems = ["RNAAS"]
 Refereed = ["1_first_author", "2_second_third_author", "3_nth_author"]
 Non-Refereed = ["4_proceedings"]
 
+[cv_document]
+# cv/publication_list.tex, written by prepare_cv.py: the summary lines, then an
+# \input{publists/...} per CV section, in this order. Prefix "#" to write one
+# commented out. Its preamble (above \begin{document}) is yours to edit;
+# compile it into cv/publication_list.pdf with --pdf.
+title = "Publications"
+summaries = ["Refereed", "#Non-Refereed"]
+sections = ["selectedpubs", "ascollaborator", "TKS", "asobserver", "#proceedings"]
+
 [max_authors]
 # Authors listed before "et al." in each list (named as in pubs/, without .tex).
 # Lists not named here use `default`; all.tex always lists every author.
@@ -64,7 +73,7 @@ default = 5
 2_second_third_author = 10
 
 [cv_max_authors]
-# The same for the CV section files in pubs/for_cv/ (named without .tex), for use with prepare_cv.py
+# The same for the CV section files in cv/publists/ (named without .tex), for use with prepare_cv.py
 # Sections not named here use `default`, or their lists' [max_authors] values if there's no default. 
 # `--maxauthors` overrides these too.
 default = 5

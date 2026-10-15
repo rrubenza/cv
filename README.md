@@ -16,10 +16,12 @@ Everything in `pubs/` is auto-generated and safe to delete before a re-run.
 uv run scripts/update_pubs.py            # refresh the lists from ADS
 uv run scripts/update_pubs.py --maxauthors 5   # same, 5 authors everywhere (lists and CV)
 uv run scripts/pub_stats.py              # summary stats from the last update
-uv run scripts/prepare_cv.py             # just refresh pubs/for_cv/ from the lists
+uv run scripts/prepare_cv.py             # just refresh cv/publists/ from the lists
+uv run scripts/update_pubs.py --pdf      # also compile cv/publication_list.pdf
+uv run scripts/prepare_cv.py --pdf-only  # just recompile the PDF (e.g. after editing the preamble)
 ```
 
-This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `pubs/`, sorted in reverse chronological order. Note `prepare_cv.py`, which merges lists into the CV section files in `pubs/for_cv/` set by `[cv_sections]` (keeping each file's hand-written header), runs automatically at the end of `update_pubs.py`, but you can also run it itself to just update that step.
+This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `pubs/`, sorted in reverse chronological order. Note `prepare_cv.py`, which merges lists into the CV section files in `cv/publists/` set by `[cv_sections]` (keeping each file's hand-written header), runs automatically at the end of `update_pubs.py`, but you can also run it itself to just update that step.
 
 
 | File | Contents |
@@ -41,6 +43,9 @@ This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `
 | `papers.json` | per-paper metadata (author position, citations, ...) |
 | `missing_orcid.md` | papers where ADS doesn't link your ORCID to your name |
 
+See `cv/` for an example CV usage; just the publication list is compiled 
+and displayed for reference at `cv/publication_list.pdf`.
+
 ## Setting it up for your own publications
 
 In `config.toml`:
@@ -48,5 +53,5 @@ In `config.toml`:
 1. **`[author]`**: your `first`, `middle` (optional) and `last` name. Used to resolve the desired name formatting (e.g., "R.~A. Rubenzahl", "Rubenzahl, R. A.", ...) and bolding. Add your `orcid` to catch papers under other name variants and skip papers by homonymous others; papers where ADS doesn't link your ORCID are listed in `pubs/missing_orcid.md`, claim these in ADS to resolve.
 2. **`[[nth_author]]`**: optional sub-lists for papers where you're 4th author or later. Make an ADS library for each (e.g. "as observer"), add papers to it, and name it here; a rule can instead match titles with a regex (`title_pattern`), see the "TESS-Keck Survey" example I use. Entries which are not able to be sorted (i.e. they do not appear in your ADS libraries) are flagged and printed so you can file them appropriately (and then re-run). Without rules, all go in `3_nth_author.tex`.
 3. **`[overrides]`**: hard rules to place individual specific papers (by ADS bibcode) in a named list. Useful for e.g. preprints that should go in a named sub-list.
-4. **`[cv_sections]`**: names the lists to populate `pubs/for_cv/` files, which are to be copied/transfered into the CV. Missing files are created with a minimal `\subsection` header for display in your CV; edit this directly in the `for_cv/list.tex` with what you want, it will persist over re-runs (only entries from the first dated `\cvitem` and below are overwritten).
+4. **`[cv_sections]`**: names the lists to populate `cv/publists/` files, which are to be copied/transfered into the CV. Missing files are created with a minimal `\subsection` header for display in your CV; edit this directly in the `for_cv/list.tex` with what you want, it will persist over re-runs (only entries from the first dated `\cvitem` and below are overwritten).
 5. **`[max_authors]`, `[cv_max_authors]`, `[format]`**: author counts and the ADS export formats.

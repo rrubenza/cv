@@ -1,6 +1,8 @@
 # cv
 
-Keeps the publication lists in a CV up to date from NASA ADS, with your name in bold.
+Keeps the publication lists in my CV up to date from NASA ADS, with my name in bold.
+
+New: now configurable for any user! See the greatly expanded `config.toml`.
 
 ## Usage
 

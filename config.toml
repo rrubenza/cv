@@ -1,0 +1,56 @@
+# Settings for scripts/update_pubs.py.
+
+[max_authors]
+# Authors listed before "et al." in each list (named as in pubs/, without .tex).
+# Lists not named here use `default`; all.tex always lists every author.
+# `uv run scripts/update_pubs.py --maxauthors N` overrides all of these for one run.
+default = 5
+1_first_author = 10
+2_second_third_author = 10
+
+[cv_max_authors]
+# The same for the CV section files in pubs/for_cv/ (named without .tex), for use with prepare_cv.py
+# Sections not named here use `default`, or their lists' [max_authors] values if there's no default. 
+# `--maxauthors` overrides these too.
+default = 5
+selectedpubs = 10
+proceedings = 10
+TKS = 1
+
+[format]
+# ADS custom export formats; see https://ui.adsabs.harvard.edu/help/actions/export
+# Important notes
+# - %AUTHORS becomes the author list, in `author_style`, cut to the max authors set above. 
+# - Keep the title as ``{%T}'' (the script links it to the DOI)
+# - Keep %AUTHORS followed by ", ``", which informs where "(incl. RAR)" goes. 
+#
+# author_style is the ADS author-list code. Examples for 3 authors:
+#   o  R.~A. Rubenzahl, F. Dai, S. Halverson, et al.
+#   O  R.~A. Rubenzahl, F. Dai, S. Halverson, and 24 colleagues
+#   l  Rubenzahl, R.~A., Dai, F., Halverson, S., et al.
+#   L  Rubenzahl, R.~A., Dai, F., Halverson, S., and 24 colleagues
+#   g  Rubenzahl R.~A., Dai F., Halverson S., et al.
+#   i  Rubenzahl, R.~A., F. Dai, S. Halverson, et al.
+#   I  Rubenzahl, R.~A., F. Dai, S. Halverson, and 24 colleagues
+#   a  Rubenzahl, Ryan A., Dai, Fei, Halverson, Samuel, et al.
+#   A  Rubenzahl, Ryan A., Dai, Fei, Halverson, Samuel, and 24 colleagues
+#   m  Rubenzahl, Dai, Halverson et al.
+author_style = "o"
+
+# Published papers default format
+published = '''%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', \textit{%J}, %V, %p}\n'''
+# Same, with ADS's journal abbreviations (%q: AJ, ApJ, MNRAS, ...; 
+# but also raw codes for non-journals, e.g. "yCat", "zndo", "PhDT"):
+# published = '''%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', \textit{%q}, %V, %p}\n'''
+
+# Preprints without a journal version (%p holds the arXiv ID), 
+# we list separately as possible "submitted" articles.
+submitted = '''%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', \textit{submitted}, %p}\n'''
+
+# For preprints forced in a list by hand (CATEGORY_OVERRIDES in update_pubs.py), don't print "submitted"
+preprint = '''%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', %p}\n'''
+
+# Replace full journal names (%J) with the abbreviations in journals.toml, which
+# starts from the AASTeX journal macros and also covers proceedings, abstracts and
+# catalogs. (Has no effect with %q, which is already abbreviated.)
+custom_abbreviations = false

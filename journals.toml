@@ -1,0 +1,88 @@
+# Journal abbreviations, used when custom_abbreviations = true in config.toml.
+#
+# [journals] keys are journal names exactly as ADS has them (plain text, "&" not
+# "\&"); values are what to print instead (LaTeX). A numbered meeting such as
+# "American Astronomical Society Meeting Abstracts #243" uses the entry without
+# the number and keeps it ("AAS Meeting Abstracts \#243"). [bibstems] matches by
+# ADS's journal code instead, for venues whose name changes with every volume
+# (e.g. each SPIE proceedings volume has its own title). Anything not listed
+# keeps its full name. Changes take effect on the next update_pubs.py run.
+#
+# The journal list starts from the journal macros in AASTeX 6.3.1
+# (aastex631.cls, e.g. \aj -> AJ), with names checked against ADS.
+
+[journals]
+# --- From AASTeX ---
+"The Astronomical Journal" = "AJ"
+"The Planetary Science Journal" = "PSJ"
+"Annual Review of Astronomy and Astrophysics" = 'ARA\&A'
+"The Astrophysical Journal" = "ApJ"
+"The Astrophysical Journal Letters" = "ApJL"
+"The Astrophysical Journal Supplement Series" = "ApJS"
+"Applied Optics" = "ApOpt"
+"Astrophysics and Space Science" = 'Ap\&SS'
+"Astronomy and Astrophysics" = 'A\&A'
+"Astronomy and Astrophysics Review" = 'A\&A~Rv'
+"Astronomy and Astrophysics Supplement Series" = 'A\&AS'
+"Astronomicheskii Zhurnal" = "AZh"
+"Bulletin of the American Astronomical Society" = "BAAS"
+"Icarus" = "Icarus"
+"Journal of the American Association of Variable Star Observers (JAAVSO)" = "JAAVSO"
+"Journal of the Royal Astronomical Society of Canada" = "JRASC"
+"Memoirs of the Royal Astronomical Society" = "MmRAS"
+"Monthly Notices of the Royal Astronomical Society" = "MNRAS"
+"Physical Review A" = "PhRvA"
+"Physical Review B" = "PhRvB"
+"Physical Review C" = "PhRvC"
+"Physical Review D" = "PhRvD"
+"Physical Review E" = "PhRvE"
+"Physical Review Letters" = "PhRvL"
+"Publications of the Astronomical Society of the Pacific" = "PASP"
+"Publications of the Astronomical Society of Japan" = "PASJ"
+"Quarterly Journal of the Royal Astronomical Society" = "QJRAS"
+"Sky and Telescope" = 'S\&T'
+"Solar Physics" = "SoPh"
+"Soviet Astronomy" = "Soviet~Ast."
+"Space Science Reviews" = "SSRv"
+"Zeitschrift fur Astrophysik" = "ZA"
+"International Astronomical Union Circular" = "IAUC"
+"Astrophysical Letters" = "Astrophys.~Lett."
+"Bulletin of the Astronomical Institutes of the Netherlands" = "BAN"
+"Fundamentals of Cosmic Physics" = "FCPh"
+"Geochimica et Cosmochimica Acta" = "GeoCoA"
+"Geophysical Research Letters" = "Geophys.~Res.~Lett."
+"Journal of Geophysical Research" = "J.~Geophys.~Res."
+"Journal of Quantitative Spectroscopy and Radiative Transfer" = "JQSRT"
+"Memorie della Societa Astronomica Italiana" = "MmSAI"
+"Nuclear Physics A" = "NuPhA"
+"Physics Reports" = "PhR"
+"Physica Scripta" = "PhyS"
+"Planetary and Space Science" = "Planet.~Space~Sci."
+"Acta Astronomica" = "AcA"
+"Chinese Astronomy and Astrophysics" = 'ChA\&A'
+"Chinese Journal of Astronomy and Astrophysics" = 'ChJA\&A'
+"Journal of Cosmology and Astroparticle Physics" = "JCAP"
+"New Astronomy" = "NewA"
+"New Astronomy Reviews" = "NewAR"
+"Publications of the Astronomical Society of Australia" = "PASA"
+"Revista Mexicana de Astronomia y Astrofisica" = "RMxAA"
+"Meteoritics and Planetary Science" = 'M\&PS'
+"Journal of Chemical Physics" = "JChPh"
+"Nature" = "Nature"
+"American Astronomical Society Meeting Abstracts" = "AAS Meeting Abstracts"
+"AAS/Division for Planetary Sciences Meeting Abstracts" = "AAS/DPS Meeting Abstracts"
+
+# --- Not in AASTeX ---
+"Research Notes of the American Astronomical Society" = "RNAAS"
+"Astronomische Nachrichten" = "AN"
+"Nature Astronomy" = "NatAs"
+"Science" = "Science"
+"Journal of Astronomical Telescopes, Instruments, and Systems" = "JATIS"
+"Astronomy and Computing" = 'A\&C'
+"AAS/Division for Extreme Solar Systems Abstracts" = "AAS/ESS Abstracts"
+"35th International Cosmic Ray Conference (ICRC2017)" = "Proc. ICRC 2017"
+"VizieR Online Data Catalog" = "VizieR"
+"Astrophysics Source Code Library" = "ASCL"
+
+[bibstems]
+"SPIE" = "Proc. SPIE"

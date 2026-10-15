@@ -23,7 +23,7 @@ uv run scripts/update_pubs.py --pdf      # also compile cv/publication_list.pdf
 uv run scripts/prepare_cv.py --pdf-only  # just recompile the PDF (e.g. after editing the preamble)
 ```
 
-This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `pubs/`, sorted in reverse chronological order. Note `prepare_cv.py`, which merges lists into the CV section files in `cv/publists/` set by `[cv_sections]` (keeping each file's hand-written header), runs automatically at the end of `update_pubs.py`, but you can also run it itself to just update that step.
+This writes LaTeX `\cvitem` lists (for use with [`\documentclass{moderncv}`](https://github.com/moderncv)) to `pubs/`, sorted in reverse chronological order. Note `prepare_cv.py`, which merges lists into the CV section files in `cv/publists/` set by `[cv_sections]` (keeping each file's hand-written header), runs automatically at the end of `update_pubs.py`, but you can also run it itself to just update that step.
 
 
 | File | Contents |

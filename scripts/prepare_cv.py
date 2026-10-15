@@ -1,10 +1,11 @@
-"""Generate the CV-ready formatted lists in pubs/for_cv/. These are for
-copying into my CV overleaf project, to then import into the document.
+"""Generate the CV-ready formatted lists in pubs/for_cv/, for copying into a CV.
 
+Which lists go into which section file is set by [cv_sections] in config.toml.
 Each section file keeps its hand-written header, all entries with a {year} field
 are then replaced with the updated list in reverse chronological order. Also
-updates teh citation count in the subsection title, and stamps the file
-with a "%% Last updated: ..." line.
+updates the citation count in the subsection title, and stamps the file
+with a "%% Last updated: ..." line. Missing section files are created with a
+minimal \\subsection header to edit.
 
 Runs automatically at the end of scripts/update_pubs.py;
 Can also run this script directly to e.g. redo with config settings changed.
@@ -12,21 +13,34 @@ Can also run this script directly to e.g. redo with config settings changed.
 
 import json
 import re
+import tomllib
 from datetime import date
 from pathlib import Path
 
 PUBS = Path(__file__).resolve().parent.parent / "pubs"
 CV_DIR = PUBS / "for_cv"
+CONFIG = PUBS.parent / "config.toml"
 
-# CV section files (in for_cv/)
-# Number of authors printed comes from [cv_max_authors] in config.toml.
-SECTIONS = {
-    "selectedpubs.tex": ["1_first_author", "2_second_third_author"],
-    "ascollaborator.tex": ["3_as_collaborator"],
-    "asobserver.tex": ["4_as_observer"],
-    "TKS.tex": ["5_tks"],
-    "proceedings.tex": ["6_proceedings"],
-}
+
+def load_config():
+    return tomllib.loads(CONFIG.read_text()) if CONFIG.exists() else {}
+
+
+def sections():
+    """[cv_sections] from config.toml: {section file: [lists merged into it]}."""
+    return load_config().get("cv_sections", {})
+
+
+def summaries():
+    """[cv_summary] from config.toml: {label: [lists counted in that line]}."""
+    return load_config().get(
+        "cv_summary",
+        {
+            "Refereed": ["1_first_author", "2_second_third_author", "3_nth_author"],
+            "Non-Refereed": ["4_proceedings"],
+        },
+    )
+
 
 FIRST_ENTRY = re.compile(r"^[ \t]*\\cvitem\{\d{4}\}", re.MULTILINE)
 LAST_UPDATED = re.compile(r"^%*\s*Last updated:.*", re.MULTILINE)
@@ -50,6 +64,10 @@ def citation_label(n):
 
 
 def update_section(path, items):
+    if not path.exists():
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(rf"\subsection{{{path.stem}}}" + "\n")
+        print(f"created {path.relative_to(PUBS.parent)}; edit its header as you like")
     text = path.read_text()
     match = FIRST_ENTRY.search(text)
     header = (text[: match.start()] if match else text).rstrip("\n")
@@ -67,18 +85,7 @@ def update_section(path, items):
     print(f"{len(entries):4d}  {path.relative_to(PUBS.parent)}  {cites}")
 
 
-# Summary lines printed to copy-paste into the CV Publications section header
-SUMMARIES = {
-    "Refereed": [
-        "1_first_author",
-        "2_second_third_author",
-        "3_as_collaborator",
-        "4_as_observer",
-        "5_tks",
-        "00_unsorted",
-    ],
-    "Non-Refereed": ["6_proceedings"],
-}
+# Author-position groups in each summary line.
 AUTHOR_GROUPS = {
     "first author": lambda pos: pos == 1,
     "second/third author": lambda pos: pos in (2, 3),
@@ -102,30 +109,25 @@ def h_index(records):
 
 
 def main():
-    config = PUBS.parent / "config.toml"
     if (
-        config.exists()
-        and config.stat().st_mtime > (PUBS / "cv_entries.json").stat().st_mtime
+        CONFIG.exists()
+        and CONFIG.stat().st_mtime > (PUBS / "cv_entries.json").stat().st_mtime
     ):
         print(
             "Warning: config.toml changed since the last update_pubs.py run;\n"
             "Rerun update_pubs.py to apply the new settings.\n"
         )
-    sections = load_entries()
-    for filename in SECTIONS:
-        path = CV_DIR / filename
-        if not path.exists():
-            print(f"skipping {path.relative_to(PUBS.parent)}: no such file")
-            continue
-        update_section(path, sections.get(filename, []))
+    entries = load_entries()
+    for filename in sections():
+        update_section(CV_DIR / filename, entries.get(filename, []))
 
     records = json.loads((PUBS / "papers.json").read_text())
     print("\nSummary lines for the CV:")
-    for label, names in SUMMARIES.items():
-        print(summary_line(label, [r for r in records if r["category"] in names]))
+    for label, names in summaries().items():
+        print(summary_line(label, [r for r in records if set(names) & set(r["lists"])]))
     today = date.today()
     total = sum(r["citations"] for r in records)
-    # Small comment for my own personal history tracking
+    # A comment line for tracking your h-index over time
     when = ["early", "mid", "late"][(today.month - 1) // 4]
     print(f"%h-index: {h_index(records)} ({total:,} citations) -- {when} {today.year}")
 

@@ -9,8 +9,12 @@
     "citations": 0,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2026MNRAS.551g1462H",
@@ -22,8 +26,12 @@
     "citations": 0,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": false,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2026arXiv260902888E",
@@ -35,8 +43,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": true,
-    "tks": false,
-    "category": "0_non_refereed"
+    "orcid_linked": false,
+    "category": "0_non_refereed",
+    "lists": [
+      "0_non_refereed"
+    ]
   },
   {
     "bibcode": "2026AJ....172...48H",
@@ -48,8 +59,12 @@
     "citations": 5,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2026AJ....171..342L",
@@ -61,8 +76,11 @@
     "citations": 1,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "2_second_third_author"
+    "orcid_linked": true,
+    "category": "2_second_third_author",
+    "lists": [
+      "2_second_third_author"
+    ]
   },
   {
     "bibcode": "2026AJ....171..259R",
@@ -74,8 +92,11 @@
     "citations": 2,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "1_first_author"
+    "orcid_linked": true,
+    "category": "1_first_author",
+    "lists": [
+      "1_first_author"
+    ]
   },
   {
     "bibcode": "2026yCat..22550008R",
@@ -87,8 +108,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2026yCat..51700051T",
@@ -100,8 +124,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2026arXiv260323713H",
@@ -113,8 +140,11 @@
     "citations": 2,
     "refereed": false,
     "submitted": true,
-    "tks": false,
-    "category": "0_non_refereed"
+    "orcid_linked": false,
+    "category": "0_non_refereed",
+    "lists": [
+      "0_non_refereed"
+    ]
   },
   {
     "bibcode": "2026ApJ...999L..26B",
@@ -126,8 +156,12 @@
     "citations": 6,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2026AJ....171..135W",
@@ -139,8 +173,12 @@
     "citations": 5,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2026AAS...24735201L",
@@ -152,8 +190,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2026yCat..22780052H",
@@ -165,8 +206,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2026zndo..18418838R",
@@ -178,8 +222,11 @@
     "citations": 2,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/zenodo"
+    "orcid_linked": true,
+    "category": "other/zenodo",
+    "lists": [
+      "other/zenodo"
+    ]
   },
   {
     "bibcode": "2026yCat..51690235V",
@@ -191,8 +238,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2025AJ....170..282B",
@@ -204,8 +254,12 @@
     "citations": 8,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2025AJ....170..175Z",
@@ -217,8 +271,12 @@
     "citations": 5,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2025yCat..51680295Z",
@@ -230,8 +288,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2025AJ....170..109B",
@@ -243,8 +304,12 @@
     "citations": 22,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024zndo...1475226B",
@@ -256,8 +321,11 @@
     "citations": 2,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/zenodo"
+    "orcid_linked": false,
+    "category": "other/zenodo",
+    "lists": [
+      "other/zenodo"
+    ]
   },
   {
     "bibcode": "2025AJ....170...51T",
@@ -269,8 +337,12 @@
     "citations": 7,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2025PASP..137g4401G",
@@ -282,8 +354,11 @@
     "citations": 5,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "2_second_third_author"
+    "orcid_linked": true,
+    "category": "2_second_third_author",
+    "lists": [
+      "2_second_third_author"
+    ]
   },
   {
     "bibcode": "2025ApJS..278...52H",
@@ -295,8 +370,12 @@
     "citations": 24,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2025yCat..22720032P",
@@ -308,8 +387,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2025yCat..51680196L",
@@ -321,8 +403,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2025AJ....169..235V",
@@ -334,8 +419,12 @@
     "citations": 17,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2025ApJ...983L..36L",
@@ -347,8 +436,12 @@
     "citations": 6,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2025AJ....169..212H",
@@ -360,8 +453,11 @@
     "citations": 14,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "2_second_third_author"
+    "orcid_linked": true,
+    "category": "2_second_third_author",
+    "lists": [
+      "2_second_third_author"
+    ]
   },
   {
     "bibcode": "2025yCat..51680135P",
@@ -373,8 +469,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2025yCat..22740035I",
@@ -386,8 +485,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024AJ....168..295Z",
@@ -399,8 +501,12 @@
     "citations": 15,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024zndo..14053214B",
@@ -412,8 +518,11 @@
     "citations": 2,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/zenodo"
+    "orcid_linked": false,
+    "category": "other/zenodo",
+    "lists": [
+      "other/zenodo"
+    ]
   },
   {
     "bibcode": "2024yCat..51680101D",
@@ -425,8 +534,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024yCat..51680081S",
@@ -438,8 +550,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024ascl.soft11028P",
@@ -451,8 +566,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/code"
+    "orcid_linked": false,
+    "category": "other/code",
+    "lists": [
+      "other/code"
+    ]
   },
   {
     "bibcode": "2024ApJ...975..147H",
@@ -464,8 +582,12 @@
     "citations": 22,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AJ....168..194T",
@@ -477,8 +599,12 @@
     "citations": 10,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AJ....168..196L",
@@ -490,8 +616,12 @@
     "citations": 10,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AJ....168..188R",
@@ -503,8 +633,11 @@
     "citations": 10,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "1_first_author"
+    "orcid_linked": true,
+    "category": "1_first_author",
+    "lists": [
+      "1_first_author"
+    ]
   },
   {
     "bibcode": "2024AJ....168..189G",
@@ -516,8 +649,12 @@
     "citations": 13,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024ApJS..274...35I",
@@ -529,8 +666,12 @@
     "citations": 24,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024tkas.confE..49H",
@@ -542,8 +683,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": true,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2024tsc3.confE..56H",
@@ -555,8 +699,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": true,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2024AJ....168..135P",
@@ -568,8 +715,12 @@
     "citations": 3,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AJ....168..101D",
@@ -581,8 +732,12 @@
     "citations": 22,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024ApJ...971L..40R",
@@ -594,8 +749,11 @@
     "citations": 8,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "1_first_author"
+    "orcid_linked": true,
+    "category": "1_first_author",
+    "lists": [
+      "1_first_author"
+    ]
   },
   {
     "bibcode": "2024AJ....168...81S",
@@ -607,8 +765,12 @@
     "citations": 15,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024SPIE13096E..06K",
@@ -620,8 +782,11 @@
     "citations": 1,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": false,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2024SPIE13096E..09G",
@@ -633,8 +798,11 @@
     "citations": 28,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": false,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2024RNAAS...8..187Y",
@@ -646,8 +814,12 @@
     "citations": 4,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024yCat..51670282L",
@@ -659,8 +831,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024PhDT........12R",
@@ -672,8 +847,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/thesis"
+    "orcid_linked": true,
+    "category": "other/thesis",
+    "lists": [
+      "other/thesis"
+    ]
   },
   {
     "bibcode": "2024yCat..51670153R",
@@ -685,8 +863,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024yCat..51670233H",
@@ -698,8 +879,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024AJ....167..282L",
@@ -711,8 +895,12 @@
     "citations": 4,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024ApJS..272...32P",
@@ -724,8 +912,12 @@
     "citations": 72,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024yCat..51670194D",
@@ -737,8 +929,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024AJ....167..233H",
@@ -750,8 +945,12 @@
     "citations": 41,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AJ....167..194D",
@@ -763,8 +962,12 @@
     "citations": 5,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024ESS.....520006R",
@@ -776,8 +979,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2024yCat..51670084H",
@@ -789,8 +995,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024yCat..51670070B",
@@ -802,8 +1011,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024yCat..51660153M",
@@ -815,8 +1027,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024yCat..22710016D",
@@ -828,8 +1043,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024AJ....167..151H",
@@ -841,8 +1059,12 @@
     "citations": 3,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AJ....167..153R",
@@ -854,8 +1076,11 @@
     "citations": 12,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "1_first_author"
+    "orcid_linked": true,
+    "category": "1_first_author",
+    "lists": [
+      "1_first_author"
+    ]
   },
   {
     "bibcode": "2024ApJS..271...16D",
@@ -867,8 +1092,12 @@
     "citations": 13,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AAS...24342904R",
@@ -880,8 +1109,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2024yCat..51660049D",
@@ -893,8 +1125,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024yCat..51660062B",
@@ -906,8 +1141,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024yCat..51660033M",
@@ -919,8 +1157,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2024AJ....167...84H",
@@ -932,8 +1173,12 @@
     "citations": 1,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024AJ....167...70B",
@@ -945,8 +1190,12 @@
     "citations": 17,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2024arXiv240207893C",
@@ -956,10 +1205,14 @@
     "author_position": 33,
     "n_authors": 70,
     "citations": 15,
-    "refereed": false,
+    "refereed": true,
     "submitted": true,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": false,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023PASP..135l5002R",
@@ -971,8 +1224,11 @@
     "citations": 30,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "1_first_author"
+    "orcid_linked": true,
+    "category": "1_first_author",
+    "lists": [
+      "1_first_author"
+    ]
   },
   {
     "bibcode": "2023yCat..51650033D",
@@ -984,8 +1240,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2023AJ....166..153A",
@@ -997,8 +1256,12 @@
     "citations": 18,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023AN....34430088K",
@@ -1010,8 +1273,11 @@
     "citations": 1,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": false,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2023AJ....166...62B",
@@ -1023,8 +1289,12 @@
     "citations": 57,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023AJ....166...49D",
@@ -1036,8 +1306,12 @@
     "citations": 16,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023AJ....166...33M",
@@ -1049,8 +1323,12 @@
     "citations": 30,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023zndo...8102085B",
@@ -1062,8 +1340,11 @@
     "citations": 1,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/zenodo"
+    "orcid_linked": false,
+    "category": "other/zenodo",
+    "lists": [
+      "other/zenodo"
+    ]
   },
   {
     "bibcode": "2023yCat..51650060V",
@@ -1075,8 +1356,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2023MNRAS.519.5637K",
@@ -1088,8 +1372,12 @@
     "citations": 13,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023AJ....165...60V",
@@ -1101,8 +1389,12 @@
     "citations": 19,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023AJ....165...33D",
@@ -1114,8 +1406,12 @@
     "citations": 76,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2023AAS...24132301R",
@@ -1127,8 +1423,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2023AJ....165...10E",
@@ -1140,8 +1439,12 @@
     "citations": 10,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022yCat..51640097M",
@@ -1153,8 +1456,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022yCat..51630293T",
@@ -1166,8 +1472,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022yCat..51630247J",
@@ -1179,8 +1488,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022AJ....164...97M",
@@ -1192,8 +1504,12 @@
     "citations": 8,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022MNRAS.514.1606B",
@@ -1205,8 +1521,12 @@
     "citations": 59,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022SPIE12184E..05K",
@@ -1218,8 +1538,11 @@
     "citations": 4,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": false,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2022BAAS...54e.358R",
@@ -1231,8 +1554,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2022AJ....163..293T",
@@ -1244,8 +1570,12 @@
     "citations": 17,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022AJ....163..297C",
@@ -1257,8 +1587,12 @@
     "citations": 51,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022AJ....163..260S",
@@ -1270,8 +1604,11 @@
     "citations": 13,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "2_second_third_author"
+    "orcid_linked": true,
+    "category": "2_second_third_author",
+    "lists": [
+      "2_second_third_author"
+    ]
   },
   {
     "bibcode": "2022AJ....163..247J",
@@ -1283,8 +1620,12 @@
     "citations": 40,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022yCat..51630061D",
@@ -1296,8 +1637,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022yCat..51630101L",
@@ -1309,8 +1653,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022yCat..51630168W",
@@ -1322,8 +1669,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022AJ....163..168W",
@@ -1335,8 +1685,12 @@
     "citations": 57,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022yCat..51620265M",
@@ -1348,8 +1702,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022AJ....163...61D",
@@ -1361,8 +1718,12 @@
     "citations": 38,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022AJ....163..101L",
@@ -1374,8 +1735,12 @@
     "citations": 38,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022A&A...658A.176H",
@@ -1387,8 +1752,12 @@
     "citations": 18,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2022yCat..51620181L",
@@ -1400,8 +1769,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2022yCat..51620215S",
@@ -1413,8 +1785,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2021AJ....162..265M",
@@ -1426,8 +1801,12 @@
     "citations": 16,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021yCat..51620089Z",
@@ -1439,8 +1818,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2021AJ....162..181L",
@@ -1452,8 +1834,12 @@
     "citations": 39,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021AJ....162..182R",
@@ -1465,8 +1851,12 @@
     "citations": 33,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021AJ....162..215S",
@@ -1478,8 +1868,12 @@
     "citations": 16,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021AJ....162...89Z",
@@ -1491,8 +1885,12 @@
     "citations": 26,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021AJ....162...62D",
@@ -1504,8 +1902,12 @@
     "citations": 44,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021ApJS..255....8R",
@@ -1517,8 +1919,12 @@
     "citations": 359,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021ApJS..255...14F",
@@ -1530,8 +1936,12 @@
     "citations": 283,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021yCat..51610119R",
@@ -1543,8 +1953,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2021yCat..51610070P",
@@ -1556,8 +1969,11 @@
     "citations": 1,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2021yCat..51610056W",
@@ -1569,8 +1985,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2021yCat..51610047K",
@@ -1582,8 +2001,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2021AJ....161..119R",
@@ -1595,8 +2017,11 @@
     "citations": 55,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "1_first_author"
+    "orcid_linked": true,
+    "category": "1_first_author",
+    "lists": [
+      "1_first_author"
+    ]
   },
   {
     "bibcode": "2021AJ....161...70P",
@@ -1608,8 +2033,11 @@
     "citations": 98,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "2_second_third_author"
+    "orcid_linked": true,
+    "category": "2_second_third_author",
+    "lists": [
+      "2_second_third_author"
+    ]
   },
   {
     "bibcode": "2021AJ....161...56W",
@@ -1621,8 +2049,12 @@
     "citations": 50,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2021AJ....161...47K",
@@ -1634,8 +2066,12 @@
     "citations": 19,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "4_as_observer"
+    "orcid_linked": true,
+    "category": "3.2_as_observer",
+    "lists": [
+      "3.2_as_observer",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2020SPIE11447E..42G",
@@ -1647,8 +2083,11 @@
     "citations": 24,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": false,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2020AJ....160..193D",
@@ -1660,8 +2099,12 @@
     "citations": 33,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2020yCat..51590241D",
@@ -1673,8 +2116,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": true,
-    "category": "other/vizier"
+    "orcid_linked": false,
+    "category": "other/vizier",
+    "lists": [
+      "other/vizier"
+    ]
   },
   {
     "bibcode": "2020AJ....159..241D",
@@ -1686,8 +2132,12 @@
     "citations": 43,
     "refereed": true,
     "submitted": false,
-    "tks": true,
-    "category": "5_tks"
+    "orcid_linked": true,
+    "category": "3.3_tks",
+    "lists": [
+      "3.3_tks",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2020ApJ...893...16A",
@@ -1699,8 +2149,12 @@
     "citations": 5,
     "refereed": true,
     "submitted": false,
-    "tks": false,
-    "category": "3_as_collaborator"
+    "orcid_linked": true,
+    "category": "3.1_as_collaborator",
+    "lists": [
+      "3.1_as_collaborator",
+      "3_nth_author"
+    ]
   },
   {
     "bibcode": "2019zndo...3534546B",
@@ -1712,8 +2166,11 @@
     "citations": 1,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/zenodo"
+    "orcid_linked": false,
+    "category": "other/zenodo",
+    "lists": [
+      "other/zenodo"
+    ]
   },
   {
     "bibcode": "2019zndo...3468482B",
@@ -1725,8 +2182,11 @@
     "citations": 1,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/zenodo"
+    "orcid_linked": false,
+    "category": "other/zenodo",
+    "lists": [
+      "other/zenodo"
+    ]
   },
   {
     "bibcode": "2019ESS.....430908R",
@@ -1738,8 +2198,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2019ESS.....410204P",
@@ -1751,8 +2214,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2019zndo...3337378B",
@@ -1764,8 +2230,11 @@
     "citations": 4,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/zenodo"
+    "orcid_linked": false,
+    "category": "other/zenodo",
+    "lists": [
+      "other/zenodo"
+    ]
   },
   {
     "bibcode": "2018AAS...23125005R",
@@ -1777,8 +2246,11 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "other/abstracts"
+    "orcid_linked": false,
+    "category": "other/abstracts",
+    "lists": [
+      "other/abstracts"
+    ]
   },
   {
     "bibcode": "2017ICRC...35..594R",
@@ -1790,8 +2262,11 @@
     "citations": 1,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": true,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   },
   {
     "bibcode": "2017ICRC...35..742R",
@@ -1803,7 +2278,10 @@
     "citations": 0,
     "refereed": false,
     "submitted": false,
-    "tks": false,
-    "category": "6_proceedings"
+    "orcid_linked": true,
+    "category": "4_proceedings",
+    "lists": [
+      "4_proceedings"
+    ]
   }
 ]

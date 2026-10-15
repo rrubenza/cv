@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Generate the CV-ready formatted lists in pubs/for_cv/. These are for
 copying into my CV overleaf project, to then import into the document.
 

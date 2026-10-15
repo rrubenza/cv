@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Query NASA ADS and write CV-ready LaTeX publication lists.
 
 Outputs (in ``pubs/``), each in reverse chronological order:

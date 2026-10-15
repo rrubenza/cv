@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """Summarize citations/h-index based on pubs/papers.json
 
 Run scripts/update_pubs.py first to refresh papers.json from ADS.

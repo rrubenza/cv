@@ -1,13 +1,14 @@
 # cv
 
-Keeps the publication lists in my CV up to date from NASA ADS, with my name in bold.
+Keeps the publication lists in a CV up to date from NASA ADS, with your name in bold.
 
 ## Usage
 
-Requires an [ADS API token](https://ui.adsabs.harvard.edu/user/settings/token),
-saved in `~/.ads/dev_key` or exported as `ADS_API_TOKEN`.
+Requires an [ADS API token](https://ui.adsabs.harvard.edu/user/settings/token), saved in `~/.ads/dev_key` or exported as `ADS_API_TOKEN`.
 
-Define formattng rules and other settings in `config.toml` (see the [ADS export help](https://ui.adsabs.harvard.edu/help/actions/export)).
+All settings live in `config.toml`, including formatting rules (see the [ADS export help](https://ui.adsabs.harvard.edu/help/actions/export)).
+
+Everything in `pubs/` is auto-generated and safe to delete before a re-run.
 
 ```bash
 uv run scripts/update_pubs.py            # refresh the lists from ADS
@@ -21,19 +22,30 @@ This writes LaTeX `\cvitem` lists (for use with `\documentclass{moderncv}`) to `
 | File | Contents |
 | --- | --- |
 | `all.tex` | every paper, full author list |
-| `00_unsorted.tex` | other 4th+ author refereed papers: add these to one of the libraries |
+| `00_unsorted.tex` | 4th+ author refereed papers not matching a `[[nth_author]]` ADS library |
 | `0_non_refereed.tex` | everything else not refereed, mostly preprints |
 | `1_first_author.tex` | 1st-author refereed papers |
 | `2_second_third_author.tex` | 2nd- and 3rd-author refereed papers |
-| `3_as_collaborator.tex` | 4th+ author refereed papers in my "as collaborator" ADS library |
-| `4_as_observer.tex` | 4th+ author refereed papers in my "as observer" ADS library |
-| `5_tks.tex` | TESS-Keck Survey refereed papers (4th+ author) |
-| `6_proceedings.tex` | conference proceedings |
-| `7_whitepapers.tex` | white papers (e.g. Astro2020 in BAAS) |
-| `other/thesis.tex` | my PhD thesis |
+| `3_nth_author.tex` | all 4th+ author refereed papers |
+| `3.x_*.tex` | your `[[nth_author]]` sub-lists of those (e.g. `3.1_as_collaborator`) |
+| `4_proceedings.tex` | conference proceedings |
+| `5_whitepapers.tex` | white papers (e.g. Astro2020 in BAAS) |
+| `other/thesis.tex` | PhD thesis |
 | `other/zenodo.tex` | Zenodo records |
 | `other/vizier.tex` | VizieR data catalogs |
 | `other/code.tex` | other software (e.g. ASCL entries) |
 | `other/abstracts.tex` | meeting abstracts |
 | `papers.json` | per-paper metadata (author position, citations, ...) |
+| `missing_orcid.md` | papers where ADS doesn't link your ORCID to your name |
 
+`prepare_cv.py` (runs automatically at the end of `update_pubs.py`) then merges lists into the CV section files in `pubs/for_cv/` set by `[cv_sections]`, keeping each file's hand-written header.
+
+## Setting it up for your own publications
+
+In `config.toml`:
+
+1. **`[author]`**: your `first`, `middle` (optional) and `last` name. Used to resolve the desired name formatting (e.g., "R.~A. Rubenzahl", "Rubenzahl, R. A.", ...) and bolding. Add your `orcid` to catch papers under other name variants and skip papers by homonymous others; papers where ADS doesn't link your ORCID are listed in `pubs/missing_orcid.md`, claim these in ADS to resolve.
+2. **`[[nth_author]]`**: optional sub-lists for papers where you're 4th author or later. Make an ADS library for each (e.g. "as observer"), add papers to it, and name it here; a rule can instead match titles with a regex (`title_pattern`), see the "TESS-Keck Survey" example I use. Entries which are not able to be sorted (i.e. they do not appear in your ADS libraries) are flagged and printed so you can file them appropriately (and then re-run). Without rules, all go in `3_nth_author.tex`.
+3. **`[overrides]`**: hard rules to place individual specific papers (by ADS bibcode) in a named list. Useful for e.g. preprints that should go in a named sub-list.
+4. **`[cv_sections]`**: names the lists to populate `pubs/for_cv/` files, which are to be copied/transfered into the CV. Missing files are created with a minimal `\subsection` header for display in your CV; edit this directly in the `for_cv/list.tex` with what you want, it will persist over re-runs (only entries from the first dated `\cvitem` and below are overwritten).
+5. **`[max_authors]`, `[cv_max_authors]`, `[format]`**: author counts and the ADS export formats.

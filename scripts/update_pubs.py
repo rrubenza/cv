@@ -1,52 +1,71 @@
 """Query NASA ADS and write CV-ready LaTeX publication lists.
 
-Outputs (in ``pubs/``), each in reverse chronological order:
+Everything specific to one person (name, ORCID, ADS libraries, overrides, CV
+sections) is set in config.toml. Outputs (in ``pubs/``), each in reverse
+chronological order:
 
     all.tex                    every paper, full author list
-    00_unsorted.tex            other 4th+ author refereed papers: add these to a library
+    00_unsorted.tex            4th+ author refereed papers matching no [[nth_author]] rule
     0_non_refereed.tex         everything else not refereed, mostly preprints (printed after each run)
     1_first_author.tex         1st-author refereed papers
     2_second_third_author.tex  2nd- and 3rd-author refereed papers
-    3_as_collaborator.tex      4th+ author refereed papers in my "as collaborator" ADS library
-    4_as_observer.tex          4th+ author refereed papers in my "as observer" ADS library
-    5_tks.tex                  TESS-Keck Survey refereed papers (4th+ author)
-    6_proceedings.tex          conference proceedings
-    7_whitepapers.tex          white papers (e.g. Astro2020 in BAAS)
-    other/thesis.tex           my PhD thesis
+    3_nth_author.tex           4th+ author refereed papers (all of them)
+    3.x_....tex                the [[nth_author]] sub-lists of 3_nth_author
+    4_proceedings.tex          conference proceedings
+    5_whitepapers.tex          white papers (e.g. Astro2020 in BAAS)
+    other/thesis.tex           PhD thesis
     other/zenodo.tex           Zenodo records
     other/vizier.tex           VizieR data catalogs
     other/code.tex             other software (e.g. ASCL entries)
     other/abstracts.tex        meeting abstracts
     papers.json                metadata (author position, citations, ...) for pub_stats.py
     cv_entries.json            entries for the CV sections, for prepare_cv.py
+    missing_orcid.md           papers where ADS doesn't link your ORCID (if orcid is set)
 
 then runs prepare_cv.py to refresh the CV section files in pubs/for_cv/.
 
-Finds and bolds my name wherever it appears; if the author list is truncated before
-my name, a bold "(incl. RAR)" is inserted after the author list instead.
+Finds and bolds your name wherever it appears; if the author list is truncated
+before your name, a bold "(incl. XYZ)" with your initials is inserted instead.
 
 Needs an ADS API token, from https://ui.adsabs.harvard.edu/user/settings/token,
 in the ADS_API_TOKEN environment variable (or in ~/.ads/dev_key).
 """
 
 import argparse
+import functools
 import json
 import os
 import re
 import sys
 import tomllib
+import unicodedata
 from pathlib import Path
 from urllib.parse import quote
 
-import requests
-
 import prepare_cv
+import requests
 
 API = "https://api.adsabs.harvard.edu/v1"
 
-# Name variants I publish under; papers matching any of these are included.
-AUTHORS = ["Rubenzahl, Ryan A.", "Rubenzahl, Ryan"]
-SURNAME = "Rubenzahl"
+OUTDIR = Path(__file__).resolve().parent.parent / "pubs"
+CONFIG = OUTDIR.parent / "config.toml"
+JOURNALS = OUTDIR.parent / "journals.toml"
+
+# Built-in lists. The [[nth_author]] sub-lists in config.toml are added to these.
+UNSORTED = "00_unsorted"
+NON_REFEREED = "0_non_refereed"
+FIRST = "1_first_author"
+SECOND_THIRD = "2_second_third_author"
+NTH = "3_nth_author"
+PROCEEDINGS = "4_proceedings"
+WHITEPAPERS = "5_whitepapers"
+OTHER = [
+    "other/thesis",
+    "other/zenodo",
+    "other/vizier",
+    "other/code",
+    "other/abstracts",
+]
 
 # Authors listed before "et al." when config.toml doesn't say; all.tex lists everyone.
 MAX_AUTHORS = 10
@@ -60,38 +79,8 @@ CV_FORMAT = r"%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', \textit{%J}, %V, %
 SUBMITTED_FORMAT = (
     r"%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', \textit{submitted}, %p}\n"
 )
-# Preprints placed by hand in CATEGORY_OVERRIDES: just the (linked) arXiv ID.
+# Preprints placed by hand in [overrides]: just the (linked) arXiv ID.
 PREPRINT_FORMAT = r"%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', %p}\n"
-
-# My hand-sorted ADS libraries (by name) for 4th+ author refereed papers.
-LIBRARIES = {
-    "3_as_collaborator": "Publications (as collaborator)",
-    "4_as_observer": "Publications (as observer)",
-}
-
-# Titles matching this are TESS-Keck Survey papers.
-# (Any separator, since some ADS titles use Unicode dashes, e.g. "TESS─Keck".)
-TKS_PATTERN = re.compile(r"TESS\W?Keck Survey|\bTKS\b", re.IGNORECASE)
-
-# Journals ADS doesn't flag as refereed that I list with refereed papers.
-REFEREED_BIBSTEMS = {"RNAAS"}
-# Papers to put in a specific list regardless of the rules below.
-CATEGORY_OVERRIDES = {
-    "2024arXiv240207893C": "5_tks",  # Chontos+ TKS XXI (preprint)
-}
-# Proceedings ADS files as (refereed) journal articles.
-PROCEEDINGS_BIBCODES = {
-    "2023AN....34430088K",  # Kassis+ Keck instrumentation status (proceedings)
-}
-
-# My given names as ADS prints them: "R.", "R.~A.", "Ryan", "Ryan A.".
-GIVEN = r"(?:R\.|Ryan)(?:(?:~|\s+)A\.)?"
-# My name in any ADS author style: "R.~A. Rubenzahl", "Rubenzahl, R.~A.",
-# "Rubenzahl R.~A.", "Rubenzahl, Ryan A." or just "Rubenzahl".
-NAME_PATTERN = re.compile(
-    rf"(?<![\w.]){GIVEN}(?:~|\s+){SURNAME}\b|\b{SURNAME}\b(?:,?\s+{GIVEN})?"
-)
-INCL = r" \textbf{(incl. RAR)}"
 
 # Unicode that ADS's LaTeX encoding leaves in place but pdflatex can't handle.
 UNICODE_FIXES = {
@@ -102,9 +91,139 @@ UNICODE_FIXES = {
     "\u2014": "---",
 }
 
-OUTDIR = Path(__file__).resolve().parent.parent / "pubs"
-CONFIG = OUTDIR.parent / "config.toml"
-JOURNALS = OUTDIR.parent / "journals.toml"
+# Combining accents -> LaTeX accent commands, to match names as ADS prints them
+# (e.g. "Stef{\'a}nsson", "Mo{\v{c}}nik").
+ACCENTS = {
+    "\u0301": "'", "\u0300": "`", "\u0308": '"', "\u0302": "^", "\u0303": "~",
+    "\u0304": "=", "\u0307": ".", "\u030c": "v", "\u0327": "c", "\u030a": "r",
+    "\u0306": "u", "\u030b": "H", "\u0328": "k",
+}  # fmt: skip
+
+
+@functools.cache
+def load_config():
+    return tomllib.loads(CONFIG.read_text()) if CONFIG.exists() else {}
+
+
+# --- The author -----------------------------------------------------------------
+
+
+@functools.cache
+def author():
+    """[author] from config.toml: first, middle, last, suffix, orcid, initials."""
+    a = dict(load_config().get("author", {}))
+    if not a.get("first") or not a.get("last"):
+        sys.exit("Set your name in config.toml: [author] first = ..., last = ...")
+    a["middles"] = a.get("middle", "").split()
+    a["suffix"] = a.get("suffix", "").strip()
+    if not a.get("initials"):
+        initials = "".join(w[0] for w in [a["first"], *a["middles"], a["last"]])
+        a["initials"] = initials + a["suffix"]
+    return a
+
+
+def tex(text):
+    """LaTeX-encode accented letters the way ADS's latex export does."""
+    out = ""
+    for ch in unicodedata.normalize("NFD", text):
+        if ch in ACCENTS and out:
+            cmd, base = ACCENTS[ch], out[-1]
+            out = out[:-1] + (
+                rf"{{\{cmd}{{{base}}}}}" if cmd.isalpha() else rf"{{\{cmd}{base}}}"
+            )
+        else:
+            out += ch
+    return out
+
+
+def initial(word):
+    """'Ryan' -> 'R.', 'Jean-Luc' -> 'J.-L.', 'A.' -> 'A.'"""
+    return "-".join(part[0] + "." for part in word.split("-"))
+
+
+@functools.cache
+def name_pattern():
+    """Your name in any ADS author style, e.g. "R.~A. Rubenzahl", "Rubenzahl, R.~A.",
+    "Rubenzahl R.~A.", "Rubenzahl, Ryan A." or just "Rubenzahl"."""
+    a = author()
+    sep = r"(?:~|\s+)"
+
+    def word(w):
+        return (
+            "(?:"
+            + "|".join(sorted({re.escape(tex(w)), re.escape(tex(initial(w)))}))
+            + ")"
+        )
+
+    given = word(a["first"]) + "".join(f"(?:{sep}{word(m)})?" for m in a["middles"])
+    last = re.escape(tex(a["last"]))
+    if a["suffix"]:  # e.g. "Palumbo, III" or "Palumbo III", when ADS keeps it
+        last += rf"(?:,?\s+{re.escape(a['suffix'])}(?![\w]))?"
+    return re.compile(
+        rf"(?<![\w.]){given}{sep}{last}(?![\w])|(?<![\w]){last}(?![\w])(?:,?\s+{given})?"
+    )
+
+
+def incl_marker():
+    return rf" \textbf{{(incl. {author()['initials']})}}"
+
+
+def query():
+    """ADS query for your papers: your name (ADS also matches its abbreviations),
+    plus your ORCID if set."""
+    a = author()
+    names = {
+        f"{a['last']}, {' '.join([a['first'], *a['middles']])}",
+        f"{a['last']}, {a['first']}",
+    }
+    q = " OR ".join(f'author:"{n}"' for n in sorted(names))
+    if a.get("orcid"):
+        q += f' OR orcid:"{a["orcid"]}"'
+    return q
+
+
+def orcids_at(doc, i):
+    """ORCIDs ADS has for the author at (0-indexed) position i."""
+    fields = ("orcid_pub", "orcid_user", "orcid_other")
+    return {doc[f][i] for f in fields if i < len(doc.get(f, []))} - {"-"}
+
+
+def locate_author(docs):
+    """Set doc["position"] (1-indexed; 0 if not found) and doc["orcid_linked"].
+
+    With an ORCID set, papers where the author at your name's position has a
+    different ORCID are someone else's, and are dropped.
+    """
+    a = author()
+    orcid = a.get("orcid")
+    last, first = a["last"].lower(), a["first"][0].lower()
+    kept = []
+    for doc in docs:
+        names = doc.get("author", [])
+        by_orcid = [
+            i for i in range(len(names)) if orcid and orcid in orcids_at(doc, i)
+        ]
+        by_name = [
+            i
+            for i, n in enumerate(names)
+            if n.split(",")[0].strip().lower() == last
+            and n.partition(",")[2].strip().lower().startswith(first)
+        ]
+        if by_orcid:
+            i = by_orcid[0]
+        elif by_name:
+            i = by_name[0]
+            if orcid and orcids_at(doc, i):
+                continue  # someone else with your name
+        else:
+            i = None
+        doc["position"] = 0 if i is None else i + 1
+        doc["orcid_linked"] = bool(by_orcid)
+        kept.append(doc)
+    return kept
+
+
+# --- Fetching from ADS ------------------------------------------------------------
 
 
 def get_token():
@@ -118,12 +237,16 @@ def get_token():
 
 
 def search(session):
-    q = " OR ".join(f'author:"{a}"' for a in AUTHORS)
+    fields = [
+        "bibcode", "identifier", "author", "title", "date", "year", "doctype",
+        "bibstem", "pub", "property", "citation_count", "doi",
+        "orcid_pub", "orcid_user", "orcid_other",
+    ]  # fmt: skip
     r = session.get(
         f"{API}/search/query",
         params={
-            "q": q,
-            "fl": "bibcode,identifier,author,title,date,year,doctype,bibstem,pub,property,citation_count,doi",
+            "q": query(),
+            "fl": ",".join(fields),
             "rows": 2000,
             "sort": "date desc",
         },
@@ -132,37 +255,47 @@ def search(session):
     return r.json()["response"]["docs"]
 
 
+def nth_rules():
+    """[[nth_author]] rules from config.toml, in order."""
+    return load_config().get("nth_author", [])
+
+
 def library_bibcodes(session):
-    """{list name: set of bibcodes} for the ADS libraries in LIBRARIES."""
+    """{library name: set of bibcodes} for all your ADS libraries.
+
+    [[nth_author]] rules sort by the libraries they name; the missing-ORCID report
+    notes which papers are in any library.
+    """
     r = session.get(f"{API}/biblib/libraries")
     r.raise_for_status()
     ids = {lib["name"]: lib["id"] for lib in r.json()["libraries"]}
+    for rule in nth_rules():
+        if rule.get("library") and rule["library"] not in ids:
+            sys.exit(
+                f"No ADS library named {rule['library']!r}; found: {', '.join(sorted(ids))}"
+            )
     out = {}
-    for name, lib in LIBRARIES.items():
-        if lib not in ids:
-            sys.exit(f"No ADS library named {lib!r}; found: {', '.join(sorted(ids))}")
-        r = session.get(f"{API}/biblib/libraries/{ids[lib]}", params={"rows": 2000})
+    for name, lib_id in ids.items():
+        r = session.get(f"{API}/biblib/libraries/{lib_id}", params={"rows": 2000})
         r.raise_for_status()
         out[name] = set(r.json()["documents"])
     return out
 
 
 def assign_libraries(docs, libraries):
-    """Tag each doc with the library list it's in (matching any of its bibcodes)."""
+    """Set doc["libraries"]: the libraries it's in (matching any of its bibcodes)."""
     for doc in docs:
         ids = {doc["bibcode"], *doc.get("identifier", [])}
-        for name, bibcodes in libraries.items():
-            if ids & bibcodes:
-                doc["library"] = name
-                break
+        doc["libraries"] = {
+            lib for lib, bibcodes in libraries.items() if ids & bibcodes
+        }
 
 
-def author_position(doc):
-    """1-indexed position of my name in the author list (0 if not found)."""
-    for i, name in enumerate(doc.get("author", []), 1):
-        if name.startswith(SURNAME + ","):
-            return i
-    return 0
+# --- Sorting into lists -----------------------------------------------------------
+
+
+def overrides():
+    return load_config().get("overrides", {})
 
 
 def is_submitted(doc):
@@ -170,23 +303,31 @@ def is_submitted(doc):
     return doc.get("doctype") == "eprint" or "arXiv" in doc.get("bibstem", [])
 
 
-def is_refereed(doc):
-    # ADS flags theses as refereed, but they aren't refereed papers.
-    if doc["bibcode"] in PROCEEDINGS_BIBCODES or doc.get("doctype") == "phdthesis":
+def ads_refereed(doc):
+    """ADS's refereed flag, plus [classify] refereed_bibstems; theses don't count."""
+    if doc.get("doctype") == "phdthesis":
         return False
-    if REFEREED_BIBSTEMS & set(doc.get("bibstem", [])):
+    extra = set(load_config().get("classify", {}).get("refereed_bibstems", []))
+    if extra & set(doc.get("bibstem", [])):
         return True
     return "REFEREED" in doc.get("property", [])
 
 
-def is_tks(doc):
-    return bool(TKS_PATTERN.search(" ".join(doc.get("title", []))))
+def nth_list(doc):
+    """The first [[nth_author]] rule a paper matches (by library or title pattern)."""
+    title = " ".join(doc.get("title", []))
+    for rule in nth_rules():
+        if rule.get("library") in doc.get("libraries", ()):
+            return rule["name"]
+        if rule.get("title_pattern") and re.search(rule["title_pattern"], title, re.I):
+            return rule["name"]
+    return UNSORTED if nth_rules() else NTH
 
 
 def category(doc):
-    """Which CV list a paper goes in (the first one it qualifies for)."""
-    if doc["bibcode"] in CATEGORY_OVERRIDES:
-        return CATEGORY_OVERRIDES[doc["bibcode"]]
+    """Which list a paper goes in (the first one it qualifies for)."""
+    if doc["bibcode"] in overrides():
+        return overrides()[doc["bibcode"]]
     if doc.get("doctype") == "phdthesis":
         return "other/thesis"
     bibstem = doc.get("bibstem", [])
@@ -198,72 +339,117 @@ def category(doc):
         return "other/code"
     if doc.get("doctype") == "abstract":
         return "other/abstracts"
-    if not is_refereed(doc):
-        if (
-            doc.get("doctype") == "inproceedings"
-            or doc["bibcode"] in PROCEEDINGS_BIBCODES
-        ):
-            return "6_proceedings"
+    if not ads_refereed(doc):
+        if doc.get("doctype") == "inproceedings":
+            return PROCEEDINGS
         title = " ".join(doc.get("title", []))
         if "BAAS" in bibstem or re.search(r"white\s*paper", title, re.IGNORECASE):
-            return "7_whitepapers"
-        return "0_non_refereed"
-    pos = author_position(doc)
-    if pos == 1:
-        return "1_first_author"
-    if pos in (2, 3):
-        return "2_second_third_author"
-    if "library" in doc:
-        return doc["library"]
-    if is_tks(doc):
-        return "5_tks"
-    return "00_unsorted"
+            return WHITEPAPERS
+        return NON_REFEREED
+    if doc["position"] == 1:
+        return FIRST
+    if doc["position"] in (2, 3):
+        return SECOND_THIRD
+    return nth_list(doc)
+
+
+def nth_names():
+    return [rule["name"] for rule in nth_rules()]
+
+
+def refereed_lists():
+    return {FIRST, SECOND_THIRD, NTH, UNSORTED, *nth_names()}
+
+
+def lists_of(doc):
+    """Every list a paper appears in: its own, plus 3_nth_author for its sub-lists."""
+    cat = category(doc)
+    if cat in {UNSORTED, *nth_names()}:
+        return [cat, NTH]
+    return [cat]
 
 
 def categorize(docs):
     names = [
-        "00_unsorted",
-        "0_non_refereed",
-        "1_first_author",
-        "2_second_third_author",
-        "3_as_collaborator",
-        "4_as_observer",
-        "5_tks",
-        "6_proceedings",
-        "7_whitepapers",
-        "other/thesis",
-        "other/zenodo",
-        "other/vizier",
-        "other/code",
-        "other/abstracts",
-    ]
+        UNSORTED, NON_REFEREED, FIRST, SECOND_THIRD, NTH, *nth_names(),
+        PROCEEDINGS, WHITEPAPERS, *OTHER,
+    ]  # fmt: skip
     groups = {name: [] for name in names}
     for doc in docs:
-        groups[category(doc)].append(doc["bibcode"])
+        for name in lists_of(doc):
+            groups.setdefault(name, []).append(doc["bibcode"])
     return groups
 
 
 def save_records(docs):
-    """Write the paper metadata to papers.json, for pub_stats.py."""
+    """Write the paper metadata to papers.json, for pub_stats.py and prepare_cv.py."""
     records = [
         {
             "bibcode": d["bibcode"],
             "year": d.get("year"),
             "doctype": d.get("doctype"),
             "title": " ".join(d.get("title", [])),
-            "author_position": author_position(d),
+            "author_position": d["position"],
             "n_authors": len(d.get("author", [])),
             "citations": d.get("citation_count", 0),
-            "refereed": is_refereed(d),
+            "refereed": category(d) in refereed_lists(),
             "submitted": is_submitted(d),
-            "tks": is_tks(d),
+            "orcid_linked": d["orcid_linked"],
             "category": category(d),
+            "lists": lists_of(d),
         }
         for d in docs
     ]
     path = OUTDIR / "papers.json"
     path.write_text(json.dumps(records, indent=2) + "\n")
     print(f"{len(records):4d}  {path.relative_to(OUTDIR.parent)}")
+
+
+def report_missing_orcid(docs):
+    """List papers where ADS doesn't link your ORCID, by list, and warn about refereed ones.
+
+    Papers that are in one of your ADS libraries are tagged as such.
+    """
+    if not author().get("orcid"):
+        return
+    nth = [*nth_names(), UNSORTED] if nth_rules() else [NTH]
+    types = {
+        "Refereed": [FIRST, SECOND_THIRD, *nth],
+        "Non-refereed": [NON_REFEREED, PROCEEDINGS, WHITEPAPERS],
+        "Other": OTHER,
+    }
+
+    def link(d):
+        tag = " (in your ADS library)" if d.get("libraries") else ""
+        return f"- [{' '.join(d.get('title', []))}]({ads_url(d)}){tag}"
+
+    path = OUTDIR / "missing_orcid.md"
+    lines = [
+        "# Papers missing your ORCID",
+        "",
+        (
+            f"Papers where the ADS entry is not linked to ORCID {author()['orcid']}. "
+            "Claim them in [ADS](https://ui.adsabs.harvard.edu/user/orcid) to fix."
+        ),
+    ]
+    for kind, names in types.items():
+        group = [d for d in docs if category(d) in names]
+        missing = [d for d in group if not d["orcid_linked"]]
+        lines += ["", f"## {kind}: {len(missing)} of {len(group)} missing"]
+        for name in names:
+            in_list = [d for d in group if category(d) == name]
+            listed = [d for d in in_list if not d["orcid_linked"]]
+            lines += ["", f"### {name}: {len(listed)} of {len(in_list)} missing"]
+            lines += [link(d) for d in listed]
+        if kind == "Refereed" and missing:
+            print(
+                f"\nWarning: {len(missing)} of {len(group)} refereed papers have no ORCID "
+                f"linked to your name in ADS; see {path.relative_to(OUTDIR.parent)}"
+            )
+    path.write_text("\n".join(lines) + "\n")
+
+
+# --- Formatting -------------------------------------------------------------------
 
 
 def export(session, bibcodes, fmt):
@@ -329,8 +515,8 @@ def add_links(entry, doc, abbreviations=None):
         entry = abbreviate(entry, doc, abbreviations)
     # Drop dangling commas left by empty fields (e.g. a thesis has no volume or page).
     entry = re.sub(r"(,\s*)+}\s*$", "}", entry)
-    for char, tex in UNICODE_FIXES.items():
-        entry = entry.replace(char, tex)
+    for char, tex_char in UNICODE_FIXES.items():
+        entry = entry.replace(char, tex_char)
     doi = doc.get("doi")
     url = (
         href_url("https://doi.org/" + quote(doi[0], safe="/:;()"))
@@ -356,7 +542,7 @@ def export_format(doc):
     """Which [format] entry a paper uses."""
     if not is_submitted(doc):
         return "published"
-    if doc["bibcode"] in CATEGORY_OVERRIDES:
+    if doc["bibcode"] in overrides():
         return "preprint"
     return "submitted"
 
@@ -391,15 +577,15 @@ def format_all(session, docs, max_authors):
 
 
 def highlight(entry):
-    """Bold my name, or flag that I'm hidden in the 'et al.'."""
-    entry, n = NAME_PATTERN.subn(lambda m: rf"\textbf{{{m.group(0)}}}", entry)
+    """Bold your name, or flag that you're hidden in the 'et al.'."""
+    entry, n = name_pattern().subn(lambda m: rf"\textbf{{{m.group(0)}}}", entry)
     if n:
         return entry
     # Insert right after the author list (i.e., before the quoted title).
     idx = entry.find(", ``")
     if idx < 0:
-        return entry.rstrip().rstrip("}") + INCL + "}"
-    return entry[:idx] + INCL + entry[idx:]
+        return entry.rstrip().rstrip("}") + incl_marker() + "}"
+    return entry[:idx] + incl_marker() + entry[idx:]
 
 
 def write(name, entries):
@@ -407,10 +593,6 @@ def write(name, entries):
     path.parent.mkdir(exist_ok=True)
     path.write_text("\n".join(highlight(e) for e in entries) + "\n")
     print(f"{len(entries):4d}  {path.relative_to(OUTDIR.parent)}")
-
-
-def load_config():
-    return tomllib.loads(CONFIG.read_text()) if CONFIG.exists() else {}
 
 
 def max_authors_per_list(names, override=None):
@@ -427,7 +609,7 @@ def max_authors_per_section(list_limits, override=None):
     """
     limits = load_config().get("cv_max_authors", {})
     out = {}
-    for section, names in prepare_cv.SECTIONS.items():
+    for section, names in prepare_cv.sections().items():
         n = limits.get(section.removesuffix(".tex"), limits.get("default"))
         for name in names:
             out[section, name] = override or n or list_limits[name]
@@ -446,7 +628,7 @@ def main():
     session = requests.Session()
     session.headers["Authorization"] = f"Bearer {get_token()}"
 
-    docs = search(session)
+    docs = locate_author(search(session))
     assign_libraries(docs, library_bibcodes(session))
     OUTDIR.mkdir(exist_ok=True)
     save_records(docs)
@@ -463,7 +645,7 @@ def main():
     for name, n in limits.items():
         needed.setdefault(n, set()).update(groups[name])
     for (_, name), n in cv_limits.items():
-        needed.setdefault(n, set()).update(groups[name])
+        needed.setdefault(n, set()).update(groups.get(name, []))
     formatted = {
         n: format_all(session, [d for d in docs if d["bibcode"] in bibcodes], n)
         for n, bibcodes in needed.items()
@@ -474,7 +656,7 @@ def main():
     # Entries for the CV sections, for prepare_cv.py.
     cv_entries = {}
     for (section, name), n in cv_limits.items():
-        for b in groups[name]:
+        for b in groups.get(name, []):
             cv_entries.setdefault(section, {})[b] = highlight(formatted[n][b])
     (OUTDIR / "cv_entries.json").write_text(json.dumps(cv_entries, indent=2) + "\n")
 
@@ -483,20 +665,22 @@ def main():
             doc = by_bibcode[b]
             print(f"  {ads_url(doc)}  {' '.join(doc.get('title', []))[:70]}")
 
-    if groups["00_unsorted"]:
-        libraries = " / ".join(LIBRARIES.values())
+    if groups[UNSORTED]:
+        libraries = " / ".join(r["library"] for r in nth_rules() if r.get("library"))
         print(f"\nUnsorted papers: add to an ADS library ({libraries}) and rerun:")
-        print_links(groups["00_unsorted"])
+        print_links(groups[UNSORTED])
+
+    report_missing_orcid(docs)
 
     print("\nCV sections:")
     prepare_cv.main()
 
-    if groups["0_non_refereed"]:
+    if groups[NON_REFEREED]:
         stars = "*" * 80
         print(
             f"\n{stars}\nNon-refereed (possibly submitted): move by hand if submitted:"
         )
-        print_links(groups["0_non_refereed"])
+        print_links(groups[NON_REFEREED])
         print(stars)
 
 

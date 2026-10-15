@@ -1,4 +1,59 @@
-# Settings for scripts/update_pubs.py.
+# Settings for scripts/update_pubs.py, prepare_cv.py and pub_stats.py.
+# Update these with your own info if you want to run this for your papers.
+
+[author]
+first = "Ryan"
+middle = "A."            # optional; several middle names/initials are fine
+last = "Rubenzahl"
+suffix = ""              # optional, e.g. "Jr." or "III"; appended to the initials below
+orcid = "0000-0003-3856-3143" # optional, for disambiguating same-name authors
+                              # if provided, will collect all records lacking ORCID
+                              # and record them in in pubs/missing_orcid.md.
+# initials = "RAR"       # for "(incl. RAR)" when you're in the "et al."; 
+#                        # custom override here, otherwise derived from name and suffix
+
+# I like to sort my 4th+ author refereed papers into sub-lists based on my role 
+# and/or contribution to the project. These are defined in ADS libraries I curate,
+# which I define with no overlap. Here these are checked in order, so the first to 
+# match would win (if there are overlaps). Papers matching no rule go to 
+# 00_unsorted.tex and are printed after each run, so you can file them.
+# 3_nth_author.tex always lists all of them. Remove/comment out these to skip sub-lists.
+[[nth_author]]
+name = "3.1_as_collaborator"
+library = "Publications (as collaborator)"
+
+[[nth_author]]
+name = "3.2_as_observer"
+library = "Publications (as observer)"
+
+[[nth_author]]
+name = "3.3_tks"
+library = "Publications (TKS)"
+# Or, without a library, match by title (e.g. a collaboration's paper series):
+# title_pattern = 'TESS\W?Keck Survey|\bTKS\b'
+
+[overrides]
+# Put specific papers (by ADS bibcode) in a given list, regardless of the rules.
+"2024arXiv240207893C" = "3.3_tks"        # Chontos+ TKS XXI (preprint)
+"2023AN....34430088K" = "4_proceedings"  # Kassis+, which ADS files as a refereed article
+
+[classify]
+# ADS journal codes (bibstems) to go in the 'referred' list even though ADS doesn't label as such.
+refereed_bibstems = ["RNAAS"]
+
+[cv_sections]
+# CV section files in pubs/for_cv/, defined by the lists they contain.
+# Missing files in pubs/for_cv/ are created with a minimal header for you to edit.
+"selectedpubs.tex" = ["1_first_author", "2_second_third_author"]
+"ascollaborator.tex" = ["3.1_as_collaborator"]
+"asobserver.tex" = ["3.2_as_observer"]
+"TKS.tex" = ["3.3_tks"]
+"proceedings.tex" = ["4_proceedings"]
+
+[cv_summary]
+# Summary \cvitem lines printed by prepare_cv.py: label = lists counted.
+Refereed = ["1_first_author", "2_second_third_author", "3_nth_author"]
+Non-Refereed = ["4_proceedings"]
 
 [max_authors]
 # Authors listed before "et al." in each list (named as in pubs/, without .tex).
@@ -47,7 +102,7 @@ published = '''%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', \textit{%J}, %V, 
 # we list separately as possible "submitted" articles.
 submitted = '''%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', \textit{submitted}, %p}\n'''
 
-# For preprints forced in a list by hand (CATEGORY_OVERRIDES in update_pubs.py), don't print "submitted"
+# For preprints forced in a list by hand ([overrides] above), don't print "submitted"
 preprint = '''%ZEncoding:latex\cvitem{%Y}{%AUTHORS, ``{%T}'', %p}\n'''
 
 # Replace full journal names (%J) with the abbreviations in journals.toml, which

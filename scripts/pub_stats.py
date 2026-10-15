@@ -6,6 +6,7 @@ Prints paper counts, citation counts and h-index by author position
 """
 
 import json
+import tomllib
 from pathlib import Path
 
 PUBS = Path(__file__).resolve().parent.parent / "pubs"
@@ -39,7 +40,11 @@ def rows(papers):
     unknown = [p for p in papers if p["author_position"] == 0]
     if unknown:
         yield "Name not in author list", unknown
-    yield "TESS-Keck Survey", [p for p in papers if p["tks"]]
+    # One row per [[nth_author]] sub-list in config.toml.
+    config = PUBS.parent / "config.toml"
+    rules = tomllib.loads(config.read_text()).get("nth_author", []) if config.exists() else []
+    for rule in rules:
+        yield rule["name"], [p for p in papers if rule["name"] in p["lists"]]
     yield "Submitted (preprints)", [p for p in papers if p["submitted"]]
 
 

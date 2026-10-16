@@ -38,8 +38,11 @@ library = "Publications (TKS)"
 "2023AN....34430088K" = "4_proceedings"  # Kassis+, which ADS files as a refereed article
 
 [classify]
-# ADS journal codes (bibstems) to go in the 'referred' list even though ADS doesn't label as such.
-refereed_bibstems = ["RNAAS"]
+# Research notes (RNAAS) and preprints placed in the publication list 
+# (by [overrides]) get this marker on their year, and aren't counted 
+# in the "Refereed" summary lines; instead are tallied in the legend
+# line set by [cv_document] not_refereed_note.
+not_refereed_marker = '$^\dagger$'
 
 [cv_sections]
 # CV section files in cv/publists/, defined by the lists they contain.
@@ -53,16 +56,21 @@ refereed_bibstems = ["RNAAS"]
 [cv_summary]
 # Summary \cvitem lines printed by prepare_cv.py: label = lists counted.
 Refereed = ["1_first_author", "2_second_third_author", "3_nth_author"]
-Non-Refereed = ["4_proceedings"]
+Proceedings = ["4_proceedings"]
+Whitepapers = ["5_whitepapers"]
 
 [cv_document]
 # cv/publication_list.tex, written by prepare_cv.py: the summary lines, then an
-# \input{publists/...} per CV section, in this order. Prefix "#" to write one
-# commented out. Its preamble (above \begin{document}) is yours to edit;
+# \input{publists/...} per CV section, in this order. Prefix "#" to start one
+# commented out; after that, comment lines in or out in the file itself and the
+# script keeps them that way. Its preamble (above \begin{document}) is yours to edit;
 # compile it into cv/publication_list.pdf with --pdf.
 title = "Publications"
-summaries = ["Refereed", "#Non-Refereed"]
+summaries = ["Refereed", "#Proceedings", "#Whitepapers"]
 sections = ["selectedpubs", "ascollaborator", "TKS", "asobserver", "#proceedings"]
+# Legend for the not-refereed marker ([classify]); paper and citation counts
+# by type are appended, e.g. ": 1 arXiv preprint (15 citations), ...".
+not_refereed_note = '$^\dagger$Not refereed'
 
 [max_authors]
 # Authors listed before "et al." in each list (named as in pubs/, without .tex).

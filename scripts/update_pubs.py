@@ -303,14 +303,20 @@ def is_submitted(doc):
     return doc.get("doctype") == "eprint" or "arXiv" in doc.get("bibstem", [])
 
 
+# Research notes (not refereed) are listed with refereed papers, marked as not refereed.
+RESEARCH_NOTES = {"RNAAS"}
+
+
+def is_research_note(doc):
+    return bool(RESEARCH_NOTES & set(doc.get("bibstem", [])))
+
+
 def ads_refereed(doc):
-    """ADS's refereed flag, plus [classify] refereed_bibstems; theses don't count."""
+    """Whether a paper goes in the refereed lists: ADS's refereed flag, plus research
+    notes (flagged as not refereed there); theses don't count."""
     if doc.get("doctype") == "phdthesis":
         return False
-    extra = set(load_config().get("classify", {}).get("refereed_bibstems", []))
-    if extra & set(doc.get("bibstem", [])):
-        return True
-    return "REFEREED" in doc.get("property", [])
+    return is_research_note(doc) or "REFEREED" in doc.get("property", [])
 
 
 def nth_list(doc):
@@ -361,6 +367,26 @@ def refereed_lists():
     return {FIRST, SECOND_THIRD, NTH, UNSORTED, *nth_names()}
 
 
+def not_refereed_flag(doc):
+    """In a refereed list though ADS doesn't call it refereed (a research note, or a
+    preprint placed there by an override)."""
+    return category(doc) in refereed_lists() and "REFEREED" not in doc.get("property", [])
+
+
+def not_refereed_type(doc):
+    """What a flagged paper is, for the legend: "research note", "arXiv preprint", ..."""
+    if is_research_note(doc):
+        return "research note"
+    if is_submitted(doc):
+        return "arXiv preprint"
+    return doc.get("doctype", "paper")
+
+
+def not_refereed_marker():
+    """[classify] not_refereed_marker, added to the year of flagged entries."""
+    return load_config().get("classify", {}).get("not_refereed_marker", r"$^\dagger$")
+
+
 def lists_of(doc):
     """Every list a paper appears in: its own, plus 3_nth_author for its sub-lists."""
     cat = category(doc)
@@ -392,7 +418,9 @@ def save_records(docs):
             "author_position": d["position"],
             "n_authors": len(d.get("author", [])),
             "citations": d.get("citation_count", 0),
-            "refereed": category(d) in refereed_lists(),
+            "refereed": category(d) in refereed_lists() and not not_refereed_flag(d),
+            "not_refereed_flag": not_refereed_flag(d),
+            "not_refereed_type": not_refereed_type(d) if not_refereed_flag(d) else None,
             "submitted": is_submitted(d),
             "orcid_linked": d["orcid_linked"],
             "category": category(d),
@@ -511,6 +539,13 @@ def abbreviate(entry, doc, abbreviations):
 
 def add_links(entry, doc, abbreviations=None):
     """Link the title to the DOI (or ADS) and append a linked citation count."""
+    if not_refereed_flag(doc):  # e.g. \cvitem{2024$^\dagger$}
+        entry = re.sub(
+            r"\\cvitem\{(\d{4})\}",
+            lambda m: rf"\cvitem{{{m.group(1)}{not_refereed_marker()}}}",
+            entry,
+            count=1,
+        )
     if abbreviations:
         entry = abbreviate(entry, doc, abbreviations)
     # Drop dangling commas left by empty fields (e.g. a thesis has no volume or page).
